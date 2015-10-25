@@ -24,9 +24,14 @@ type configType struct {
 	InputFileTxt string
 }
 
+func (c *configType) Validate() bool {
+	return c.InputFile != "" && c.OutputFile != "" && c.PackageName != "" && c.ConstantName != ""
+}
+
 var config = configType{}
 
-const tpl = `package {{.PackageName}}
+const tpl = `//Genereated by WGF -- DO NOT EDIT
+package {{.PackageName}}
 
 const {{.ConstantName}} = ` + "`{{.InputFileTxt}}`" + `
 
@@ -35,11 +40,11 @@ const {{.ConstantName}} = ` + "`{{.InputFileTxt}}`" + `
 func init() {
 	flag.StringVar(&config.InputFile, "i", "", "INPUT: The file to convert to go source")
 	flag.StringVar(&config.OutputFile, "o", "", "OUTPUT: The go output file")
-	flag.StringVar(&config.PackageName, "p", "", "Package: The package for the go file")
+	flag.StringVar(&config.PackageName, "p", os.Getenv("$GOPACKAGE"), "Package: The package for the go file")
 	flag.StringVar(&config.ConstantName, "c", "", "Constant: The name of the constant")
 	flag.Parse()
 
-	if len(os.Args) < 4 {
+	if config.Validate() {
 		fmt.Println("Please enter the following flags")
 		flag.Usage()
 		os.Exit(1)
