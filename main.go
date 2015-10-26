@@ -44,7 +44,7 @@ func init() {
 	flag.StringVar(&config.ConstantName, "c", "", "Constant: The name of the constant")
 	flag.Parse()
 
-	if config.Validate() {
+	if !config.Validate() {
 		fmt.Println("Please enter the following flags")
 		flag.Usage()
 		os.Exit(1)
