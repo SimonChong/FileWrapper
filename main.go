@@ -58,7 +58,7 @@ func main() {
 	t := template.Must(template.New("tpl").Parse(tpl))
 
 	in, err := ioutil.ReadFile(config.InputFile)
-	config.InputFileTxt = strings.Replace(string(in), "`", "` + \"`", -1)
+	config.InputFileTxt = strings.Replace(string(in), "`", "` + \"`\" + `", -1)
 	checkErr(err)
 
 	f, err := os.Create(config.OutputFile)
