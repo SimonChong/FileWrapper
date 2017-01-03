@@ -1,11 +1,17 @@
 # WGF
 Wrap in a Go File.
 
-
 Creates Go source files by wrapping the contents of files in Go files and exposing them as constants or variable
 
 ## Purpose
-This program was created to be used by the "go generate" command so that its contents can be included in the compiled source code. This helps encapusulate all functionality in a compiled go executable
+This program was created to be used by the "go generate" command so that its contents can be included in the compiled source code. This helps encapsulate all functionality in a compiled go executable
+
+## Install
+
+```
+go get -u github.com/SimonChong/wgf
+```
+
 
 ## Example
 
